@@ -1,10 +1,14 @@
 # FastAPI 기능을 쓰기 위해 가져오는 준비 코드
 from fastapi import FastAPI
-# DTO import
+import json
 from schemas.user_schema import UserRequest
+from schemas.product_rank import ProductRankResponse
 from schemas.filter import FilterRequest
 from data.products import products
+from services.ai_service import get_test
+from services.ai_service import get_recommendation
 from services.productFilterService import filter_products
+
 
 
 # app 객체 생성(시작점)
@@ -51,11 +55,50 @@ def create_user(request: UserRequest):
 def get_products():
     return products
 
+# ai 없는 필터 테스트
 @app.post("/search")
 def product_search(filter: FilterRequest):
         filters = filter.model_dump()
         result = filter_products(products, filters)
         return result
+
+# ai 동작 확인
+@app.get("/getTest")
+def gpt_test():
+    print("gpt확인")
+    result = get_test()
+    print("ai반환완료")
+    return {"result": result}
+
+# ai를 적용한 필터 테스트
+@app.get("/ai-search")
+def ai_search_test(query: str):
+    print("도착 확인")
+    ai_result = get_test(query)
+    filters = json.loads(ai_result) 
+
+
+    print("AI 원본 결과:", ai_result)
+
+    print("파싱된 필터:", filters)
+
+    result = filter_products(products, filters)
+    print("최종 결과:", result)
+
+    if len(result) == 0:
+         return "조건에 맞는 상품이 없습니다."
+    
+    final = get_recommendation(result, query)
+
+    data = json.loads(final) 
+    dto = ProductRankResponse(**data) 
+
+    return dto
+
+
+
+
+
 
 
 

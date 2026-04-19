@@ -31,11 +31,13 @@ def filter_products(products, filters):
         if(filters["price"] != 0):
             if (product["price"] > filters["price"]):
                 continue
+        
+        if filters["tags"]:
+            # tags가 하나라도 존재한다면 통과
+            if not any(tag in product["tags"] for tag in filters["tags"]):
+                continue
+                
 
         result.append(product)
         
     return result
-        
-
-
-
