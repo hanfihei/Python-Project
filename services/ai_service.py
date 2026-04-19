@@ -9,9 +9,8 @@ load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def get_test(query: str):
-    # GPT 호출
     response = client.responses.create(
-        model="gpt-5.4-mini",  # 일단 이걸로
+        model="gpt-5.4-mini",
         input=[
             {
                 "role": "system",  # system -> ai 성격, 규칙 설정
@@ -49,7 +48,7 @@ def get_test(query: str):
                     "category": "노트북",
                     "weight": 1.0,
                     "price": 0,
-                    "tags": ["휴대성", "가성비"]
+                    "tags": ["휴대성"]
                 }
                 """
             },
