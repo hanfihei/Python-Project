@@ -2,6 +2,10 @@
 from fastapi import FastAPI
 # DTO import
 from schemas.user_schema import UserRequest
+from schemas.filter import FilterRequest
+from data.products import products
+from services.productFilterService import filter_products
+
 
 # app 객체 생성(시작점)
 app = FastAPI() 
@@ -36,3 +40,22 @@ def create_user(request: UserRequest):
         "age": request.age,
         "message": "유저 생성" # 단순 메세지 반환
     }
+
+
+
+
+
+#===============상품 추천 API====================
+
+@app.get("/products")
+def get_products():
+    return products
+
+@app.post("/search")
+def product_search(filter: FilterRequest):
+        filters = filter.model_dump()
+        result = filter_products(products, filters)
+        return result
+
+
+
