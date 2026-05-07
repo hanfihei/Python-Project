@@ -1,4 +1,4 @@
-from data.products import products
+from app.data.products import products
 
 # products는 더미데이터, filter는 ai가 넘겨준 json자료
 def filter_products(products, filters): 

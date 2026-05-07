@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS products (
     price INT,
     description TEXT,
     tags TEXT,
+    weight DOUBLE PRECISION,
     embedding VECTOR(1536)
 );

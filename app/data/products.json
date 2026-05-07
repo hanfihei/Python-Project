@@ -1,4 +1,4 @@
-products = [
+[
     {"name": "LG gram 14", "price": 1500000, "weight": 0.99, "category": "노트북", "tags": ["휴대성", "가벼움"], "description": "초경량으로 휴대성이 뛰어난 노트북"},
     {"name": "LG gram 16", "price": 1800000, "weight": 1.19, "category": "노트북", "tags": ["휴대성", "대화면"], "description": "큰 화면과 가벼움을 동시에 갖춘 노트북"},
     {"name": "MacBook Air M2", "price": 1600000, "weight": 1.24, "category": "노트북", "tags": ["휴대성", "프리미엄"], "description": "얇고 가벼운 애플 노트북"},

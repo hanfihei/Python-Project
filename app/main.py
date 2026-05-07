@@ -2,12 +2,12 @@
 from fastapi import FastAPI
 import json
 from schemas.user_schema import UserRequest
-from schemas.product_rank import ProductRankResponse
-from schemas.filter import FilterRequest
-from data.products import products
-from services.ai_service import get_test
-from services.ai_service import get_recommendation
-from services.productFilterService import filter_products
+from app.schemas.product_rank import ProductRankResponse
+from app.schemas.filter import FilterRequest
+from app.data.products import products
+from app.services.ai_service import get_test
+from app.services.ai_service import get_recommendation
+from app.services.productFilterService import filter_products
 
 
 
@@ -22,29 +22,6 @@ users = []
 @app.get("/")
 def root(): 
     return {"message": "hello fastapi"} #딕셔너리로 -> json
-
-
-@app.get("/users/{id}")
-def get_name(id: int, name: str):
-    return {"result": f"{id}{name}"} # f-string -> 자료형 맞춰줌
-
-
-@app.post("/users")
-def create_user(request: UserRequest):
-    # 딕셔너리 생성
-    user = { 
-        "name": request.name,
-        "age": request.age
-    }
-
-    users.append(user)
-
-    return {
-        "name": request.name,
-        "age": request.age,
-        "message": "유저 생성" # 단순 메세지 반환
-    }
-
 
 
 
